@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package slamdata
+package quasar
 
 import scala.{Predef => P}
 import scala.{collection => C}

@@ -19,7 +19,6 @@ package quasar
 import scala.{Predef => P}
 import scala.{collection => C}
 import scala.collection.{immutable => I}
-import scala.inline
 import scala.{runtime => R}
 
 
@@ -69,6 +68,8 @@ object Predef extends LowPriorityImplicits {
   type Stream[+A] = I.Stream[A]
   val  Stream     = I.Stream
   val  #::        = Stream.#::
+
+  type inline = scala.inline
 
   // NB: not using scala.Predef.??? or scala.NotImplementedError because specs2
   // intercepts the result in a useless way.

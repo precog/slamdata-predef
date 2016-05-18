@@ -76,8 +76,6 @@ object Predef extends LowPriorityImplicits {
   @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Throw"))
   def ??? : Nothing = throw new java.lang.RuntimeException("not implemented")
 
-  def implicitly[T](implicit e: T) = P.implicitly[T](e)
-
   @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.ExplicitImplicitTypes"))
   implicit def $conforms[A]: P.<:<[A, A] = P.$conforms[A]
   implicit def ArrowAssoc[A]: A => P.ArrowAssoc[A] = P.ArrowAssoc[A] _

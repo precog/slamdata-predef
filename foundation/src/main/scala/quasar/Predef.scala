@@ -86,6 +86,7 @@ object Predef extends LowPriorityImplicits {
     P.booleanWrapper _
   @inline implicit val charWrapper: Char => R.RichChar = P.charWrapper _
   @inline implicit val intWrapper: Int => R.RichInt = P.intWrapper _
+  @inline implicit val doubleWrapper: Double => R.RichDouble = P.doubleWrapper _
 
   // would rather not have these, but …
   def print(x: scala.Any)   = scala.Console.print(x)

@@ -71,12 +71,10 @@ object Predef extends LowPriorityImplicits {
 
   type inline = scala.inline
 
-  // NB: not using scala.Predef.??? or scala.NotImplementedError because specs2
-  // intercepts the result in a useless way.
-  @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Throw"))
+  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
   def ??? : Nothing = throw new java.lang.RuntimeException("not implemented")
 
-  @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.ExplicitImplicitTypes"))
+  @SuppressWarnings(Array("org.wartremover.warts.ExplicitImplicitTypes"))
   implicit def $conforms[A]: P.<:<[A, A] = P.$conforms[A]
   implicit def ArrowAssoc[A]: A => P.ArrowAssoc[A] = P.ArrowAssoc[A] _
   implicit def augmentString(x: String): I.StringOps = P.augmentString(x)

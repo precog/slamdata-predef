@@ -21,8 +21,15 @@ import scala.{collection => C}
 import scala.collection.{immutable => I}
 import scala.{runtime => R}
 
+object Predef extends Predef
 
-object Predef extends LowPriorityImplicits {
+class Predef extends LowPriorityImplicits {
+  /** The typelevel Predef additions which makes literal
+   *  types more reasonable to use.
+   */
+  type ValueOf[A]                           = scala.ValueOf[A]
+  def valueOf[A](implicit z: ValueOf[A]): A = z.value
+
   type deprecated = scala.deprecated
   type tailrec = scala.annotation.tailrec
   type SuppressWarnings = java.lang.SuppressWarnings

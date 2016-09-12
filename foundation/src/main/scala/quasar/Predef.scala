@@ -34,7 +34,7 @@ class Predef extends LowPriorityImplicits {
    *  It looks like scalaz already staked out "Endo" for the
    *  lower version.
    */
-  type EndoM[F[X]] = scalaz.NaturalTransformation[F, F]
+  type EndoK[F[X]] = scalaz.NaturalTransformation[F, F]
 
   type deprecated = scala.deprecated
   type tailrec = scala.annotation.tailrec

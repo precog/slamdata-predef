@@ -105,6 +105,9 @@ class Predef extends LowPriorityImplicits {
   def print(x: scala.Any)   = scala.Console.print(x)
   def println()             = scala.Console.println()
   def println(x: scala.Any) = scala.Console.println(x)
+  // Need these often to avoid bad inference
+  type Product = scala.Product
+  type Serializable = scala.Serializable
 
   // remove or replace these
   type List[+A] = I.List[A] // use scalaz.IList instead

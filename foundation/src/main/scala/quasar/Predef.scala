@@ -103,7 +103,6 @@ class Predef extends LowPriorityImplicits {
 
   // would rather not have these, but …
   def print(x: scala.Any)   = scala.Console.print(x)
-  def println()             = scala.Console.println()
   def println(x: scala.Any) = scala.Console.println(x)
   // Need these often to avoid bad inference
   type Product = scala.Product

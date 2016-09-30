@@ -36,6 +36,8 @@ class Predef extends LowPriorityImplicits {
    */
   type EndoK[F[X]] = scalaz.NaturalTransformation[F, F]
 
+  type NTComp[F[X], G[Y]] = scalaz.NaturalTransformation[F, matryoshka.∘[G, F]#λ]
+
   type deprecated = scala.deprecated
   type tailrec = scala.annotation.tailrec
   type SuppressWarnings = java.lang.SuppressWarnings

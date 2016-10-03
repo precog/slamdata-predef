@@ -30,16 +30,6 @@ class Predef extends LowPriorityImplicits {
   type ValueOf[A]                           = scala.ValueOf[A]
   def valueOf[A](implicit z: ValueOf[A]): A = z.value
 
-  /** An endomorphism is a mapping from a category to itself.
-   *  It looks like scalaz already staked out "Endo" for the
-   *  lower version.
-   */
-  type EndoK[F[X]] = scalaz.NaturalTransformation[F, F]
-
-  // TODO generalize this and matryoshka.Delay into
-  // `type KleisliK[M[_], F[_], G[_]] = F ~> (M ∘ G)#λ`
-  type NTComp[F[X], G[Y]] = scalaz.NaturalTransformation[F, matryoshka.∘[G, F]#λ]
-
   type deprecated = scala.deprecated
   type tailrec = scala.annotation.tailrec
   type SuppressWarnings = java.lang.SuppressWarnings

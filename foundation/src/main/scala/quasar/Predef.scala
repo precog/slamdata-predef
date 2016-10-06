@@ -82,7 +82,6 @@ class Predef extends LowPriorityImplicits {
   def ??? : Nothing = throw new java.lang.RuntimeException("not implemented")
 
   @SuppressWarnings(Array("org.wartremover.warts.ExplicitImplicitTypes"))
-  implicit def $conforms[A]: P.<:<[A, A] = P.$conforms[A]
   implicit def ArrowAssoc[A]: A => P.ArrowAssoc[A] = P.ArrowAssoc[A] _
   implicit def augmentString(x: String): I.StringOps = P.augmentString(x)
   implicit def genericArrayOps[T]: Array[T] => C.mutable.ArrayOps[T] =

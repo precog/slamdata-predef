@@ -16,8 +16,6 @@
 
 package quasar.pkg
 
-import scala.inline
-
 @java.lang.SuppressWarnings(scala.Array("org.wartremover.warts.Overloading"))
 trait PackageMethods {
   self: quasar.Predef =>
@@ -48,9 +46,8 @@ trait PackageMethods {
   @inline final def implicitly[A](implicit value: A): A       = value
 
   implicit def quasarExtensionOps[A](x: A) = new QuasarExtensionOps(x)
-}
 
-final class QuasarExtensionOps[A](private val self: A) extends scala.AnyVal {
-  @inline def |>[B](f: A => B): B = f(self)
-  @inline def ->[B](y: B): (A, B) = scala.Tuple2(self, y)
+  /** Type parameter curriers. */
+  def eqBy[A]   = new EqualBy[A]
+  def showBy[A] = new ShowBy[A]
 }

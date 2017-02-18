@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package quasar.pkg
+package slamdata.pkg
 
-@java.lang.SuppressWarnings(scala.Array("org.wartremover.warts.Overloading"))
+import java.lang.SuppressWarnings
+
+@SuppressWarnings(scala.Array("org.wartremover.warts.Overloading"))
 trait PackageMethods {
-  self: quasar.Predef =>
+  self: slamdata.Predef =>
 
   def Cmp(n: Int): Cmp = scalaz.Ordering fromInt n
 
@@ -43,11 +45,13 @@ trait PackageMethods {
   def uuid(s: String): UUID                                          = java.util.UUID fromString s
 
   @inline final def classTag[A](implicit z: CTag[A]): CTag[A] = z
-  @inline final def implicitly[A](implicit value: A): A       = value
 
-  implicit def quasarExtensionOps[A](x: A) = new QuasarExtensionOps(x)
+  @SuppressWarnings(scala.Array("org.wartremover.warts.ImplicitParameter"))
+  @inline final def implicitly[A](implicit value: A): A = value
+
+  implicit def extensionOps[A](x: A): ExtensionOps[A] = new ExtensionOps(x)
 
   /** Type parameter curriers. */
-  def eqBy[A]   = new EqualBy[A]
-  def showBy[A] = new ShowBy[A]
+  def eqBy[A]: EqualBy[A]  = new EqualBy[A]
+  def showBy[A]: ShowBy[A] = new ShowBy[A]
 }

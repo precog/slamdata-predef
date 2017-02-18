@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package quasar.pkg
+package slamdata.pkg
 
-import scala.{ inline, AnyVal }
+import scala.inline
 import scalaz.{ Show, Equal }
 
 final class EqualBy[A] {
@@ -25,7 +25,7 @@ final class EqualBy[A] {
 final class ShowBy[A] {
   def apply[B](f: A => B)(implicit z: Show[B]): Show[A] = Show.show[A](x => z show f(x))
 }
-final class QuasarExtensionOps[A](private val self: A) extends AnyVal {
+final class ExtensionOps[A](private val self: A) {
   @inline def |>[B](f: A => B): B = f(self)
   @inline def ->[B](y: B): (A, B) = scala.Tuple2(self, y)
 }

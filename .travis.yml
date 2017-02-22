@@ -12,7 +12,7 @@ matrix:
     jdk: oraclejdk7
 sudo: false
 script:
-  - sbt compile
+  - sbt compile transferPublishAndTagResources
   - scripts/publishAndTag 'slamdata/slamdata-predef'
 env:
   global:

@@ -72,7 +72,6 @@ class Predef
   type BigInt                = M.BigInt
   val  BigInt: M.BigInt.type = M.BigInt
 
-  type Iterable[+A] = C.Iterable[A]
   type IndexedSeq[+A] = C.IndexedSeq[A]
 
   type ListMap[A, +B]          = I.ListMap[A, B]

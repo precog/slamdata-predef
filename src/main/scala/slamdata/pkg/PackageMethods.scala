@@ -18,14 +18,15 @@ package slamdata.pkg
 
 import java.lang.SuppressWarnings
 
-@SuppressWarnings(scala.Array("org.wartremover.warts.Overloading"))
 trait PackageMethods {
   self: slamdata.Predef =>
 
   def Cmp(n: Int): Cmp = scalaz.Ordering fromInt n
 
+  @SuppressWarnings(scala.Array("org.wartremover.warts.Overloading"))
   def byteBuffer(xs: Array[Byte]): ByteBuffer                        = java.nio.ByteBuffer.wrap(xs)
   def byteBuffer(xs: Array[Byte], offset: Int, len: Int): ByteBuffer = java.nio.ByteBuffer.wrap(xs, offset, len)
+  @SuppressWarnings(scala.Array("org.wartremover.warts.Overloading"))
   def charBuffer(size: Int): CharBuffer                              = java.nio.CharBuffer.allocate(size)
   def charBuffer(xs: String): CharBuffer                             = java.nio.CharBuffer.wrap(xs)
   def discard[A](value: A): Unit                                     = () // for avoiding "discarding non-Unit value" warnings
@@ -33,6 +34,7 @@ trait PackageMethods {
   def jClassLoader[A: CTag]: ClassLoader                             = jClass[A].getClassLoader
   def jClass[A: CTag]: jClass                                        = classTag[A].runtimeClass
   def jPath(path: String): jPath                                     = java.nio.file.Paths get path
+  @SuppressWarnings(scala.Array("org.wartremover.warts.Overloading"))
   def jResource(c: jClass, name: String): InputStream                = c getResourceAsStream name
   def jResource[A: CTag](name: String): InputStream                  = jResource(jClass[A], name)
   def randomBool(): Boolean                                          = scala.util.Random.nextBoolean
@@ -45,9 +47,6 @@ trait PackageMethods {
   def uuid(s: String): UUID                                          = java.util.UUID fromString s
 
   @inline final def classTag[A](implicit z: CTag[A]): CTag[A] = z
-
-  @SuppressWarnings(scala.Array("org.wartremover.warts.ImplicitParameter"))
-  @inline final def implicitly[A](implicit value: A): A = value
 
   implicit def extensionOps[A](x: A): ExtensionOps[A] = new ExtensionOps(x)
 

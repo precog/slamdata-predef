@@ -16,12 +16,10 @@
 
 package slamdata.pkg
 
-import java.lang.SuppressWarnings
 import scala.{collection => sc}
-import scala.collection.{ mutable => scm, immutable => sci }
+import scala.collection.{immutable => sci}
 import scala.{util => su}
 
-@SuppressWarnings(scala.Array("org.wartremover.warts.MutableDataStructures"))
 trait PackageAliases {
   // scala stdlib
   type ->[+A, +B]          = scala.Tuple2[A, B]
@@ -29,34 +27,24 @@ trait PackageAliases {
   type Any                 = scala.Any
   type AnyRef              = scala.AnyRef
   type AnyVal              = scala.AnyVal
-  type ArrayBuffer[A]      = scm.ArrayBuffer[A]
   type CTag[A]             = scala.reflect.ClassTag[A]
   type Dynamic             = scala.Dynamic
   type Either[+A, +B]      = su.Either[A, B]
   type EndoA[A]            = A => A
-  type ListBuffer[A]       = scm.ListBuffer[A]
   type PairOf[+A]          = A -> A
   type Range               = sci.Range
   type Regex               = su.matching.Regex
   type Some[A]             = scala.Some[A]
   type StringContext       = scala.StringContext
-  type Traversable[+A]     = sc.Traversable[A]
   type Try[+A]             = su.Try[A]
   type Vec[+A]             = scala.Vector[A]
   type inline              = scala.inline
-  type scIterable[A]       = sc.Iterable[A]
   type scIterator[+A]      = sc.Iterator[A]
   type scMap[K, V]         = sc.Map[K, V]
-  type scSeq[A]            = sc.Seq[A]
   type scSet[A]            = sc.Set[A]
-  type scTraversable[+A]   = sc.Traversable[A]
   type sciMap[K, +V]       = sci.Map[K, V]
   type sciQueue[+A]        = sci.Queue[A]
-  type sciSeq[+A]          = sci.Seq[A]
   type sciTreeMap[K, +V]   = sci.TreeMap[K, V]
-  type scmMap[K, V]        = scm.Map[K, V]
-  type scmPriorityQueue[A] = scm.PriorityQueue[A]
-  type scmSet[A]           = scm.Set[A]
   type smOrdering[A]       = scala.math.Ordering[A]
   type spec                = scala.specialized
   type switch              = scala.annotation.switch
@@ -68,21 +56,14 @@ trait PackageAliases {
   val -> : scala.Product2.type                 = scala.Product2
   val :+ : sc.:+.type                          = sc.:+
   val AnyRef: scala.AnyRef.type                = scala.AnyRef
-  val ArrayBuffer: scm.ArrayBuffer.type        = scm.ArrayBuffer
   val Boolean: scala.Boolean.type              = scala.Boolean
   val Double: scala.Double.type                = scala.Double
   val Left: su.Left.type                       = su.Left
-  val ListBuffer: scm.ListBuffer.type          = scm.ListBuffer
   val Right: su.Right.type                     = su.Right
-  val Seq: sci.Seq.type                        = sci.Seq
   val Try: su.Try.type                         = su.Try
   val Vec: scala.Vector.type                   = scala.Vector
-  val scSeq: sc.Seq.type                       = sc.Seq
   val sciQueue: sci.Queue.type                 = sci.Queue
   val sciTreeMap: sci.TreeMap.type             = sci.TreeMap
-  val scmMap: scm.HashMap.type                 = scm.HashMap
-  val scmPriorityQueue: scm.PriorityQueue.type = scm.PriorityQueue
-  val scmSet: scm.HashSet.type                 = scm.HashSet
 
   // java stdlib
   type AtomicInt            = java.util.concurrent.atomic.AtomicInteger

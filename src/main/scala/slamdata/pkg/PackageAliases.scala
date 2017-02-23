@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package quasar.pkg
+package slamdata.pkg
 
-import scala.collection.{ mutable => scm, immutable => sci }
-import java.lang.SuppressWarnings
+import scala.{collection => sc}
+import scala.collection.{immutable => sci}
+import scala.{util => su}
 
-@SuppressWarnings(scala.Array("org.wartremover.warts.MutableDataStructures"))
 trait PackageAliases {
   // scala stdlib
   type ->[+A, +B]          = scala.Tuple2[A, B]
@@ -27,59 +27,43 @@ trait PackageAliases {
   type Any                 = scala.Any
   type AnyRef              = scala.AnyRef
   type AnyVal              = scala.AnyVal
-  type ArrayBuffer[A]      = scm.ArrayBuffer[A]
   type CTag[A]             = scala.reflect.ClassTag[A]
   type Dynamic             = scala.Dynamic
-  type Either[+A, +B]      = scala.util.Either[A, B]
+  type Either[+A, +B]      = su.Either[A, B]
   type EndoA[A]            = A => A
-  type ListBuffer[A]       = scm.ListBuffer[A]
   type PairOf[+A]          = A -> A
   type Range               = sci.Range
-  type Regex               = scala.util.matching.Regex
+  type Regex               = su.matching.Regex
   type Some[A]             = scala.Some[A]
   type StringContext       = scala.StringContext
-  type Traversable[+A]     = scala.collection.Traversable[A]
-  type Try[+A]             = scala.util.Try[A]
+  type Try[+A]             = su.Try[A]
   type Vec[+A]             = scala.Vector[A]
   type inline              = scala.inline
-  type scIterable[A]       = scala.collection.Iterable[A]
-  type scIterator[+A]      = scala.collection.Iterator[A]
-  type scMap[K, V]         = scala.collection.Map[K, V]
-  type scSeq[A]            = scala.collection.Seq[A]
-  type scSet[A]            = scala.collection.Set[A]
-  type scTraversable[+A]   = scala.collection.Traversable[A]
+  type scIterator[+A]      = sc.Iterator[A]
+  type scMap[K, V]         = sc.Map[K, V]
+  type scSet[A]            = sc.Set[A]
   type sciMap[K, +V]       = sci.Map[K, V]
   type sciQueue[+A]        = sci.Queue[A]
-  type sciSeq[+A]          = sci.Seq[A]
   type sciTreeMap[K, +V]   = sci.TreeMap[K, V]
-  type scmMap[K, V]        = scm.Map[K, V]
-  type scmPriorityQueue[A] = scm.PriorityQueue[A]
-  type scmSet[A]           = scm.Set[A]
   type smOrdering[A]       = scala.math.Ordering[A]
   type spec                = scala.specialized
   type switch              = scala.annotation.switch
   type transient           = scala.transient
   type unchecked           = scala.unchecked
   type volatile            = scala.volatile
-  val +:                   = scala.collection.+:
-  val ->                   = scala.Product2
-  val :+                   = scala.collection.:+
-  val AnyRef               = scala.AnyRef
-  val ArrayBuffer          = scm.ArrayBuffer
-  val Boolean              = scala.Boolean
-  val Double               = scala.Double
-  val Left                 = scala.util.Left
-  val ListBuffer           = scm.ListBuffer
-  val Right                = scala.util.Right
-  val Seq                  = sci.Seq
-  val Try                  = scala.util.Try
-  val Vec                  = scala.Vector
-  val scSeq                = scala.collection.Seq
-  val sciQueue             = sci.Queue
-  val sciTreeMap           = sci.TreeMap
-  val scmMap               = scm.HashMap
-  val scmPriorityQueue     = scm.PriorityQueue
-  val scmSet               = scm.HashSet
+
+  val +: : sc.+:.type                          = sc.+:
+  val -> : scala.Product2.type                 = scala.Product2
+  val :+ : sc.:+.type                          = sc.:+
+  val AnyRef: scala.AnyRef.type                = scala.AnyRef
+  val Boolean: scala.Boolean.type              = scala.Boolean
+  val Double: scala.Double.type                = scala.Double
+  val Left: su.Left.type                       = su.Left
+  val Right: su.Right.type                     = su.Right
+  val Try: su.Try.type                         = su.Try
+  val Vec: scala.Vector.type                   = scala.Vector
+  val sciQueue: sci.Queue.type                 = sci.Queue
+  val sciTreeMap: sci.TreeMap.type             = sci.TreeMap
 
   // java stdlib
   type AtomicInt            = java.util.concurrent.atomic.AtomicInteger
@@ -114,6 +98,6 @@ trait PackageAliases {
   type Cmp    = scalaz.Ordering
   type Eq[A]  = scalaz.Equal[A]
   type Ord[A] = scalaz.Order[A]
-  val Ord     = scalaz.Order
-  val Eq      = scalaz.Equal
+  val Ord: scalaz.Order.type = scalaz.Order
+  val Eq: scalaz.Equal.type  = scalaz.Equal
 }

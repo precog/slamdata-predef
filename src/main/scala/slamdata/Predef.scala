@@ -14,67 +14,80 @@
  * limitations under the License.
  */
 
-package quasar
+package slamdata
 
 import scala.{Predef => P}
 import scala.{collection => C}
 import scala.collection.{immutable => I}
+import scala.{math => M}
 import scala.{runtime => R}
 
 object Predef extends Predef
 
-class Predef extends LowPriorityImplicits with quasar.pkg.PackageAliases with quasar.pkg.PackageMethods {
-  /** The typelevel Predef additions which makes literal
-   *  types more reasonable to use.
-   */
-  type ValueOf[A]                           = scala.ValueOf[A]
-  def valueOf[A](implicit z: ValueOf[A]): A = z.value
-
+class Predef
+    extends LowPriorityImplicits
+    with    slamdata.pkg.PackageAliases
+    with    slamdata.pkg.PackageMethods {
   type deprecated = scala.deprecated
   type tailrec = scala.annotation.tailrec
   type SuppressWarnings = java.lang.SuppressWarnings
 
-  type Array[T] = scala.Array[T]
-  val  Array = scala.Array
+  type Array[T]                = scala.Array[T]
+  val  Array: scala.Array.type = scala.Array
+
   type Boolean = scala.Boolean
   type Byte = scala.Byte
   type Char = scala.Char
   type Double = scala.Double
-  val  Function = scala.Function
-  type Short = scala.Short
-  val  Short = scala.Short
-  type Int = scala.Int
-  val  Int = scala.Int
-  type Long = scala.Long
-  val  Long = scala.Long
-  type PartialFunction[-A, +B] = scala.PartialFunction[A, B]
-  val  PartialFunction         = scala.PartialFunction
+
+  val  Function: scala.Function.type = scala.Function
+
+  type Short                   = scala.Short
+  val  Short: scala.Short.type = scala.Short
+
+  type Int                 = scala.Int
+  val  Int: scala.Int.type = scala.Int
+
+  type Long                  = scala.Long
+  val  Long: scala.Long.type = scala.Long
+
+  type PartialFunction[-A, +B]                     = scala.PartialFunction[A, B]
+  val  PartialFunction: scala.PartialFunction.type = scala.PartialFunction
+
   type String = P.String
-  val  StringContext = scala.StringContext
-  type Symbol = scala.Symbol
-  val  Symbol  = scala.Symbol
+
+  val  StringContext: scala.StringContext.type = scala.StringContext
+
+  type Symbol                    = scala.Symbol
+  val  Symbol: scala.Symbol.type = scala.Symbol
+
   type Unit = scala.Unit
-  type Vector[+A] = scala.Vector[A]
-  val  Vector     = scala.Vector
 
-  type BigDecimal = scala.math.BigDecimal
-  val  BigDecimal = scala.math.BigDecimal
-  type BigInt = scala.math.BigInt
-  val  BigInt = scala.math.BigInt
+  type Vector[+A]                = scala.Vector[A]
+  val  Vector: scala.Vector.type = scala.Vector
 
-  type Iterable[+A] = C.Iterable[A]
+  type BigDecimal                    = M.BigDecimal
+  val  BigDecimal: M.BigDecimal.type = M.BigDecimal
+
+  type BigInt                = M.BigInt
+  val  BigInt: M.BigInt.type = M.BigInt
+
   type IndexedSeq[+A] = C.IndexedSeq[A]
 
-  type ListMap[A, +B] = I.ListMap[A, B]
-  val  ListMap        = I.ListMap
-  type Map[A, +B] = I.Map[A, B]
-  val  Map        = I.Map
-  type Set[A] = I.Set[A]
-  val  Set    = I.Set
+  type ListMap[A, +B]          = I.ListMap[A, B]
+  val  ListMap: I.ListMap.type = I.ListMap
+
+  type Map[A, +B]      = I.Map[A, B]
+  val  Map: I.Map.type = I.Map
+
+  type Set[A]          = I.Set[A]
+  val  Set: I.Set.type = I.Set
+
   type Seq[+A] = I.Seq[A]
-  type Stream[+A] = I.Stream[A]
-  val  Stream     = I.Stream
-  val  #::        = Stream.#::
+
+  type Stream[+A]              = I.Stream[A]
+  val  Stream: I.Stream.type   = I.Stream
+  val  #:: : I.Stream.#::.type = Stream.#::
 
   @SuppressWarnings(Array("org.wartremover.warts.Throw"))
   def ??? : Nothing = throw new java.lang.RuntimeException("not implemented")
@@ -89,21 +102,21 @@ class Predef extends LowPriorityImplicits with quasar.pkg.PackageAliases with qu
   @inline implicit def doubleWrapper(x: Double): R.RichDouble    = P.doubleWrapper(x)
 
   // would rather not have these, but …
-  def print(x: scala.Any)   = scala.Console.print(x)
-  def println(x: scala.Any) = scala.Console.println(x)
+  def print(x: scala.Any): Unit   = scala.Console.print(x)
+  def println(x: scala.Any): Unit = scala.Console.println(x)
   // Need these often to avoid bad inference
   type Product = scala.Product
   type Serializable = scala.Serializable
 
   // remove or replace these
-  type List[+A] = I.List[A] // use scalaz.IList instead
-  val  List     = I.List
-  val  Nil      = I.Nil
-  val  ::       = I.::
-  type Option[A] = scala.Option[A] // use scalaz.Maybe instead
-  val  Option    = scala.Option
-  val  None      = scala.None
-  val  Some      = scala.Some
+  type List[+A]          = I.List[A] // use scalaz.IList instead
+  val  List: I.List.type = I.List
+  val  Nil: I.Nil.type   = I.Nil
+  val  :: : I.::.type    = I.::
+  type Option[A]                 = scala.Option[A] // use scalaz.Maybe instead
+  val  Option: scala.Option.type = scala.Option
+  val  None: scala.None.type     = scala.None
+  val  Some: scala.Some.type     = scala.Some
   type Nothing = scala.Nothing // make functors invariant
   type Throwable = java.lang.Throwable
   type RuntimeException = java.lang.RuntimeException

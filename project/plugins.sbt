@@ -1,1 +1,1 @@
-addSbtPlugin("com.slamdata" % "sbt-slamdata" % "0.0.5")
+addSbtPlugin("com.slamdata" % "sbt-slamdata" % "0.0.6")

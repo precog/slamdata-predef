@@ -16,6 +16,11 @@
 
 package slamdata
 
+import org.scalactic.source.Position
+import scala.NotImplementedError
+import scala.annotation.unchecked.uncheckedVariance
+import scala.reflect.runtime.universe.WeakTypeTag
+
 import scala.{Predef => P}
 import scala.{collection => C}
 import scala.collection.{immutable => I}
@@ -89,8 +94,14 @@ class Predef
   val  Stream: I.Stream.type   = I.Stream
   val  #:: : I.Stream.#::.type = Stream.#::
 
-  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
-  def ??? : Nothing = throw new java.lang.RuntimeException("not implemented")
+  // better type hole
+  private type UnsafeWeakTypeTag[+A] = WeakTypeTag[A @uncheckedVariance]
+
+  @SuppressWarnings(Array(
+    "org.wartremover.warts.Throw",
+    "org.wartremover.warts.ImplicitParameter"))
+  def ???[A](implicit A: UnsafeWeakTypeTag[A], pos: Position): A =
+    throw new NotImplementedError(s"unimplemented value of type ${A.tpe} at ${pos.fileName}:${pos.lineNumber}")
 
   implicit def genericArrayOps[T]: Array[T] => C.mutable.ArrayOps[T] = P.genericArrayOps[T] _
 

@@ -11,6 +11,8 @@ lazy val root = (project in file("."))
   .settings(publishSettings)
   .settings(transferPublishAndTagResources)
   .settings(libraryDependencies += CommonDependencies.scalaz.core)
+  .settings(libraryDependencies ++= Seq(
+    "org.scalactic" %% "scalactic" % "3.0.1")) // this is just for the Position macro
   .enablePlugins(AutomateHeaderPlugin)
 
 lazy val publishSettings = commonPublishSettings ++ Seq(
@@ -20,6 +22,4 @@ lazy val publishSettings = commonPublishSettings ++ Seq(
   scmInfo := Some(
     ScmInfo(
       url("https://github.com/slamdata/slamdata-predef"),
-      "scm:git@github.com:slamdata/slamdata-predef.git"
-    )
-  ))
+      "scm:git@github.com:slamdata/slamdata-predef.git")))

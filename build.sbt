@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
   .settings(publishSettings)
   .settings(transferPublishAndTagResources)
   .settings(libraryDependencies ++= Seq(
-    "org.scalaz"    %% "scalaz-core" % "7.2.15",
+    "org.scalaz"    %% "scalaz-core" % "7.2.30",
     "org.scalactic" %% "scalactic"   % "3.0.1")) // this is just for the Position macro
   .enablePlugins(AutomateHeaderPlugin)
 

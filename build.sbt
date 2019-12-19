@@ -11,7 +11,7 @@ lazy val root = (project in file("."))
   .settings(transferPublishAndTagResources)
   .settings(libraryDependencies ++= Seq(
     "org.scalaz"    %% "scalaz-core" % "7.2.15",
-    "org.scalactic" %% "scalactic"   % "3.0.1")) // this is just for the Position macro
+    "org.scalactic" %% "scalactic"   % "3.0.8")) // this is just for the Position macro
   .enablePlugins(AutomateHeaderPlugin)
 
 lazy val publishSettings = commonPublishSettings ++ Seq(

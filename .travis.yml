@@ -5,7 +5,7 @@ scala:
   - 2.12.10
   - 2.13.1
 
-jdk: oraclejdk8
+jdk: openjdk8
 
 env:
   global:
@@ -24,8 +24,15 @@ install:
   - scripts/commonSetup
 
 script:
+  - set -e
   - $SBT ++$TRAVIS_SCALA_VERSION checkHeaders test:compile transferPublishAndTagResources
-  - scripts/publishAndTag 'slamdata/slamdata-predef'
+
+  - |-
+    if [[ $TRAVIS_SCALA_VERSION =~ 2.12 ]]; then
+      if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ "$TRAVIS_BRANCH" =~ backport/v.*|master ]]; then
+        TRAVIS_JOB_NUMBER=1 scripts/publishAndTag 'slamdata/slamdata-predef'
+      fi
+    fi
 
 branches:
   except:

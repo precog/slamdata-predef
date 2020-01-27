@@ -1,5 +1,5 @@
 /*
- * Copyright 2014–2017 SlamData Inc.
+ * Copyright 2014–2019 SlamData Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,10 +90,6 @@ class Predef
 
   type Seq[+A] = I.Seq[A]
 
-  type Stream[+A]              = I.Stream[A]
-  val  Stream: I.Stream.type   = I.Stream
-  val  #:: : I.Stream.#::.type = Stream.#::
-
   // better type hole
   private type UnsafeWeakTypeTag[+A] = WeakTypeTag[A @uncheckedVariance]
 
@@ -103,10 +99,9 @@ class Predef
   def ???[A](implicit A: UnsafeWeakTypeTag[A], pos: Position): A =
     throw new NotImplementedError(s"unimplemented value of type ${A.tpe} at ${pos.fileName}:${pos.lineNumber}")
 
-  implicit def genericArrayOps[T]: Array[T] => C.mutable.ArrayOps[T] = P.genericArrayOps[T] _
+  implicit def genericArrayOps[T] = P.genericArrayOps[T] _
 
   @inline implicit def wrapString(x: String): I.WrappedString    = P.wrapString(x)
-  @inline implicit def unwrapString(x: I.WrappedString): String  = P.unwrapString(x)
   @inline implicit def booleanWrapper(x: Boolean): R.RichBoolean = P.booleanWrapper(x)
   @inline implicit def charWrapper(x: Char): R.RichChar          = P.charWrapper(x)
   @inline implicit def intWrapper(x: Int): R.RichInt             = P.intWrapper(x)
@@ -137,5 +132,5 @@ abstract class LowPriorityImplicits {
   self: Predef =>
 
   @inline implicit def augmentString(x: String): I.StringOps               = P.augmentString(x)
-  implicit def genericWrapArray[T](x: Array[T]): C.mutable.WrappedArray[T] = P.genericWrapArray[T](x)
+  implicit def genericWrapArray[T](x: Array[T])                            = P.genericWrapArray[T](x)
 }

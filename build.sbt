@@ -8,7 +8,7 @@ lazy val root = (project in file("."))
   .settings(publishSettings)
   .settings(libraryDependencies ++= Seq(
     "org.scalaz"    %% "scalaz-core" % "7.2.28",
-    "org.scalactic" %% "scalactic"   % "3.0.8")) // this is just for the Position macro
+    "org.scalactic" %% "scalactic"   % "3.1.0")) // this is just for the Position macro
   .enablePlugins(AutomateHeaderPlugin)
 
 lazy val publishSettings = commonPublishSettings ++ Seq(

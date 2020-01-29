@@ -14,18 +14,13 @@
  * limitations under the License.
  */
 
-package slamdata.pkg
+package slamdata
 
-import scala.inline
-import scalaz.{ Show, Equal }
+import scala.{inline, Predef => P}
+import scala.collection.{immutable => I}
 
-final class EqualBy[A] {
-  def apply[B](f: A => B)(implicit z: Equal[B]): Equal[A] = z contramap f
-}
-final class ShowBy[A] {
-  def apply[B](f: A => B)(implicit z: Show[B]): Show[A] = Show.show[A](x => z show f(x))
-}
-final class ExtensionOps[A](private val self: A) {
-  @inline def |>[B](f: A => B): B = f(self)
-  @inline def ->[B](y: B): (A, B) = scala.Tuple2(self, y)
+import java.lang.String
+
+private[slamdata] trait LowPriorityCompat {
+  @inline implicit def wrapString(x: String): I.WrappedString    = P.wrapString(x)
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014–2019 SlamData Inc.
+ * Copyright 2014–2020 SlamData Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,7 +101,6 @@ class Predef
 
   implicit def genericArrayOps[T] = P.genericArrayOps[T] _
 
-  @inline implicit def wrapString(x: String): I.WrappedString    = P.wrapString(x)
   @inline implicit def booleanWrapper(x: Boolean): R.RichBoolean = P.booleanWrapper(x)
   @inline implicit def charWrapper(x: Char): R.RichChar          = P.charWrapper(x)
   @inline implicit def intWrapper(x: Int): R.RichInt             = P.intWrapper(x)
@@ -128,9 +127,10 @@ class Predef
   type RuntimeException = java.lang.RuntimeException
 }
 
-abstract class LowPriorityImplicits {
+abstract class LowPriorityImplicits extends LowPriorityCompat {
   self: Predef =>
 
   @inline implicit def augmentString(x: String): I.StringOps               = P.augmentString(x)
+
   implicit def genericWrapArray[T](x: Array[T])                            = P.genericWrapArray[T](x)
 }

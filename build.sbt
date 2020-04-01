@@ -11,6 +11,7 @@ ThisBuild / scmInfo := Some(ScmInfo(
   "scm:git@github.com:precog/slamdata-predef.git"))
 
 ThisBuild / githubRepository := "slamdata-predef"
+ThisBuild / publishAsOSSProject := true
 
 ThisBuild / crossScalaVersions := Seq("2.13.1", "2.12.11", "2.11.12")
 ThisBuild / scalaVersion := (ThisBuild / crossScalaVersions).value.head

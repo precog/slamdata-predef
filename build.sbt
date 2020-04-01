@@ -2,6 +2,8 @@ import sbt._, Keys._
 
 name := "slamdata-predef"
 
+ThisBuild / organization := "com.slamdata"
+
 ThisBuild / homepage := Some(url("https://github.com/precog/slamdata-predef"))
 
 ThisBuild / scmInfo := Some(ScmInfo(

@@ -26,7 +26,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.12.10]
+        scala: [2.13.1, 2.12.11, 2.11.12]
         java: [adopt@1.8]
     runs-on: ${{ matrix.os }}
     steps:
@@ -101,7 +101,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.12.10]
+        scala: [2.13.1]
         java: [adopt@1.8]
     runs-on: ${{ matrix.os }}
     steps:
@@ -152,10 +152,20 @@ jobs:
           path: ~/.sbt
           key: ${{ runner.os }}-sbt-cache-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/build.properties') }}-${{ hashFiles('.versions.json') }}
 
-      - name: Download target directory 'target' (2.12.10)
+      - name: Download target directory 'target' (2.13.1)
         uses: actions/download-artifact@v1
         with:
-          name: target-${{ matrix.os }}-2.12.10-${{ matrix.java }}-target
+          name: target-${{ matrix.os }}-2.13.1-${{ matrix.java }}-target
+
+      - name: Download target directory 'target' (2.12.11)
+        uses: actions/download-artifact@v1
+        with:
+          name: target-${{ matrix.os }}-2.12.11-${{ matrix.java }}-target
+
+      - name: Download target directory 'target' (2.11.12)
+        uses: actions/download-artifact@v1
+        with:
+          name: target-${{ matrix.os }}-2.11.12-${{ matrix.java }}-target
 
       - name: Download target directory 'project/target'
         uses: actions/download-artifact@v1
@@ -182,7 +192,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.12.10]
+        scala: [2.13.1]
         java: [adopt@1.8]
     runs-on: ${{ matrix.os }}
     steps:

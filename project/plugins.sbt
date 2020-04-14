@@ -1,1 +1,1 @@
-addSbtPlugin("com.precog" % "sbt-precog" % "1.3.0")
+addSbtPlugin("com.precog" % "sbt-precog" % "2.3.1")
